@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Academic Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-light: #ecf0f1;
+            --text-dark: #2c3e50;
+            --bg-light: #f8f9fa;
+            --bg-section: #ffffff;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--bg-section);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .profile-info h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-info h2 {
+            font-size: 1.25rem;
+            color: var(--secondary-color);
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Section Styles */
+        section {
+            background-color: var(--bg-section);
+            margin: 2rem 0;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        section h2 {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        /* About Section */
+        .about-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Research Interests */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .research-card {
+            background-color: var(--bg-light);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .research-card:hover {
+            transform: translateX(5px);
+        }
+
+        .research-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Publications */
+        .publication-item {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .publication-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .publication-authors {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .publication-venue {
+            color: var(--secondary-color);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .publication-links {
+            margin-top: 1rem;
+        }
+
+        .publication-links a {
+            display: inline-block;
+            margin-right: 1rem;
+            padding: 0.3rem 0.8rem;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .publication-links a:hover {
+            background-color: var(--primary-color);
+        }
+
+        /* Teaching */
+        .course-list {
+            list-style: none;
+        }
+
+        .course-list li {
+            background-color: var(--bg-light);
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .course-title {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .course-info {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Contact */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            margin-top: 4rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--bg-section);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .profile-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            section {
+                padding: 2rem 1rem;
+            }
+
+            .publication-links a {
+                display: block;
+                margin-bottom: 0.5rem;
+                text-align: center;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="nav-brand">Your Name</a>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#teaching">Teaching</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div id="home" class="hero">
+        <div class="container">
+            <div class="profile-container">
+                <img src="https://via.placeholder.com/200" alt="Profile Picture" class="profile-image">
+                <div class="profile-info">
+                    <h1>Your Name</h1>
+                    <h2>Assistant Professor of Computer Science</h2>
+                    <p>University Name | Department of Computer Science</p>
+                    <div class="social-links">
+                        <a href="#" title="Email">✉</a>
+                        <a href="#" title="Google Scholar">🎓</a>
+                        <a href="#" title="GitHub">💻</a>
+                        <a href="#" title="LinkedIn">🔗</a>
+                        <a href="#" title="Twitter">🐦</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- About Section -->
+        <section id="about">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <p>Welcome! I am an Assistant Professor in the Department of Computer Science at University Name. My research focuses on the intersection of security, privacy, and human-computer interaction.</p>
+                <p>I received my Ph.D. in Computer Science from Graduate University in 2020, where I was advised by Professor Advisor Name. Before joining University Name, I was a postdoctoral researcher at Research Institution.</p>
+                <p>My work has been published in top venues including CHI, USENIX Security, and IEEE S&P. I am passionate about developing usable security and privacy solutions that protect users while maintaining a positive user experience.</p>
+            </div>
+        </section>
+
+        <!-- Research Interests -->
+        <section id="research">
+            <h2>Research Interests</h2>
+            <div class="research-grid">
+                <div class="research-card">
+                    <h3>Usable Security & Privacy</h3>
+                    <p>Developing user-friendly security mechanisms that people can understand and use effectively in their daily digital interactions.</p>
+                </div>
+                <div class="research-card">
+                    <h3>Human Factors in Cybersecurity</h3>
+                    <p>Understanding how human behavior, cognition, and decision-making impact security outcomes in complex systems.</p>
+                </div>
+                <div class="research-card">
+                    <h3>Privacy-Preserving Technologies</h3>
+                    <p>Creating innovative solutions that protect user privacy while enabling useful functionality in modern applications.</p>
+                </div>
+                <div class="research-card">
+                    <h3>Security Education</h3>
+                    <p>Researching effective methods for teaching security concepts and raising awareness about digital threats.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications -->
+        <section id="publications">
+            <h2>Selected Publications</h2>
+            
+            <div class="publication-item">
+                <h3>Understanding User Mental Models of Privacy Settings in Social Media</h3>
+                <p class="publication-authors">Your Name, Co-author One, Co-author Two</p>
+                <p class="publication-venue">CHI 2023: ACM Conference on Human Factors in Computing Systems</p>
+                <p>This paper investigates how users conceptualize and interact with privacy settings across different social media platforms...</p>
+                <div class="publication-links">
+                    <a href="#">PDF</a>
+                    <a href="#">Slides</a>
+                    <a href="#">Video</a>
+                </div>
+            </div>
+
+            <div class="publication-item">
+                <h3>A Large-Scale Study of Password Manager Adoption and Usability</h3>
+                <p class="publication-authors">Co-author One, Your Name, Co-author Three</p>
+                <p class="publication-venue">USENIX Security 2022</p>
+                <p>We conducted a comprehensive study of password manager usage patterns among 5,000 participants...</p>
+                <div class="publication-links">
+                    <a href="#">PDF</a>
+                    <a href="#">Dataset</a>
+                    <a href="#">Code</a>
+                </div>
+            </div>
+
+            <div class="publication-item">
+                <h3>Designing Privacy-Preserving Smart Home Interactions</h3>
+                <p class="publication-authors">Your Name, Co-author One</p>
+                <p class="publication-venue">IEEE Symposium on Security and Privacy 2021</p>
+                <p>This work presents a novel framework for preserving user privacy in smart home environments...</p>
+                <div class="publication-links">
+                    <a href="#">PDF</a>
+                    <a href="#">Poster</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teaching -->
+        <section id="teaching">
+            <h2>Teaching</h2>
+            <ul class="course-list">
+                <li>
+                    <div>
+                        <div class="course-title">CS 461: Computer Security</div>
+                        <div class="course-info">Undergraduate course covering fundamental security concepts</div>
+                    </div>
+                    <span>Fall 2023, Spring 2024</span>
+                </li>
+                <li>
+                    <div>
+                        <div class="course-title">CS 598: Human Factors in Security</div>
+                        <div class="course-info">Graduate seminar on usable security research</div>
+                    </div>
+                    <span>Fall 2023</span>
+                </li>
+                <li>
+                    <div>
+                        <div class="course-title">CS 225: Data Structures</div>
+                        <div class="course-info">Core undergraduate course on algorithms and data structures</div>
+                    </div>
+                    <span>Spring 2023</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact">
+            <h2>Contact</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">✉</div>
+                    <div>
+                        <strong>Email</strong><br>
+                        yourname@university.edu
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <strong>Office</strong><br>
+                        Room 2107, Computer Science Building<br>
+                        123 University Avenue<br>
+                        City, State 12345
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🕐</div>
+                    <div>
+                        <strong>Office Hours</strong><br>
+                        Tuesdays & Thursdays<br>
+                        2:00 PM - 4:00 PM<br>
+                        Or by appointment
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Your Name. All rights reserved. | Last updated: January 2024</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // Add smooth scrolling behavior for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add active state to navigation based on scroll position
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = '';
+                if (link.getAttribute('href').includes(current)) {
+                    link.style.color = 'var(--secondary-color)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
